@@ -5,8 +5,13 @@ const videoSchema = new mongoose.Schema(
     title: {
       type: String,
       required: true,
+      trim: true,
     },
-    description: String,
+
+    description: {
+      type: String,
+      default: "",
+    },
 
     videoUrl: {
       type: String,
@@ -18,25 +23,29 @@ const videoSchema = new mongoose.Schema(
       required: true,
     },
 
+    category: {
+      type: String,
+      default: "All",
+    },
+
     views: {
       type: Number,
       default: 0,
     },
 
-    likes: {
-      type: Number,
-      default: 0,
-    },
+    likes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
 
-    dislikes: {
-      type: Number,
-      default: 0,
-    },
-
-    category: {
-      type: String,
-      default: "All",
-    },
+    dislikes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
 
     uploader: {
       type: mongoose.Schema.Types.ObjectId,
@@ -52,4 +61,5 @@ const videoSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model("Video", videoSchema);
+const Video = mongoose.model("Video", videoSchema);
+export default Video;

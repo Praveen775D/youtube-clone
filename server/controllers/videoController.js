@@ -1,33 +1,40 @@
 import Video from "../models/Video.js";
 
 
-//  GET ALL VIDEOS (with search + filter)
+// GET ALL VIDEOS (search + filter + pagination)
 export const getVideos = async (req, res) => {
   try {
-    const { search, category } = req.query;
+    const { search = "", category = "All", page = 1, limit = 8 } = req.query;
 
-    let query = {};
+    const query = {
+      title: { $regex: search, $options: "i" },
+    };
 
-    if (search) {
-      query.title = { $regex: search, $options: "i" };
-    }
-
-    if (category && category !== "All") {
+    if (category !== "All") {
       query.category = category;
     }
 
     const videos = await Video.find(query)
       .populate("uploader", "username")
+      .skip((page - 1) * limit)
+      .limit(Number(limit))
       .sort({ createdAt: -1 });
 
-    res.json(videos);
+    const total = await Video.countDocuments(query);
+
+    res.json({
+      total,
+      page: Number(page),
+      pages: Math.ceil(total / limit),
+      videos,
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
 
-//  GET SINGLE VIDEO
+// GET SINGLE VIDEO
 export const getVideoById = async (req, res) => {
   try {
     const video = await Video.findById(req.params.id)
@@ -37,7 +44,6 @@ export const getVideoById = async (req, res) => {
       return res.status(404).json({ message: "Video not found" });
     }
 
-    // increment views
     video.views += 1;
     await video.save();
 
@@ -48,26 +54,23 @@ export const getVideoById = async (req, res) => {
 };
 
 
-//  CREATE VIDEO
+// CREATE VIDEO
 export const createVideo = async (req, res) => {
   try {
-    const {
-      title,
-      description,
-      videoUrl,
-      thumbnailUrl,
-      category,
-      channelId,
-    } = req.body;
+    const { title, videoUrl, thumbnailUrl } = req.body;
+
+    if (!title || !videoUrl || !thumbnailUrl) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
 
     const video = await Video.create({
-      title,
-      description,
-      videoUrl,
-      thumbnailUrl,
-      category,
+      title: req.body.title,
+      description: req.body.description,
+      videoUrl: req.body.videoUrl,
+      thumbnailUrl: req.body.thumbnailUrl,
+      category: req.body.category,
       uploader: req.user._id,
-      channelId,
+      channelId: req.body.channelId,
     });
 
     res.status(201).json(video);
@@ -77,7 +80,7 @@ export const createVideo = async (req, res) => {
 };
 
 
-//  UPDATE VIDEO
+// UPDATE VIDEO
 export const updateVideo = async (req, res) => {
   try {
     const video = await Video.findById(req.params.id);
@@ -86,25 +89,25 @@ export const updateVideo = async (req, res) => {
       return res.status(404).json({ message: "Video not found" });
     }
 
-    // Only owner can update
     if (video.uploader.toString() !== req.user._id.toString()) {
       return res.status(403).json({ message: "Not authorized" });
     }
 
-    const updatedVideo = await Video.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
+    video.title = req.body.title || video.title;
+    video.description = req.body.description || video.description;
+    video.category = req.body.category || video.category;
+    video.thumbnailUrl = req.body.thumbnailUrl || video.thumbnailUrl;
 
-    res.json(updatedVideo);
+    const updated = await video.save();
+
+    res.json(updated);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
 
-//  DELETE VIDEO
+// DELETE VIDEO
 export const deleteVideo = async (req, res) => {
   try {
     const video = await Video.findById(req.params.id);
@@ -113,7 +116,6 @@ export const deleteVideo = async (req, res) => {
       return res.status(404).json({ message: "Video not found" });
     }
 
-    // Only owner can delete
     if (video.uploader.toString() !== req.user._id.toString()) {
       return res.status(403).json({ message: "Not authorized" });
     }
@@ -127,12 +129,21 @@ export const deleteVideo = async (req, res) => {
 };
 
 
-//  LIKE VIDEO
+// LIKE VIDEO
 export const likeVideo = async (req, res) => {
   try {
     const video = await Video.findById(req.params.id);
+    const userId = req.user._id;
 
-    video.likes += 1;
+    if (video.likes.includes(userId)) {
+      return res.status(400).json({ message: "Already liked" });
+    }
+
+    video.likes.push(userId);
+    video.dislikes = video.dislikes.filter(
+      (id) => id.toString() !== userId.toString()
+    );
+
     await video.save();
 
     res.json(video);
@@ -142,12 +153,21 @@ export const likeVideo = async (req, res) => {
 };
 
 
-//  DISLIKE VIDEO
+// DISLIKE VIDEO
 export const dislikeVideo = async (req, res) => {
   try {
     const video = await Video.findById(req.params.id);
+    const userId = req.user._id;
 
-    video.dislikes += 1;
+    if (video.dislikes.includes(userId)) {
+      return res.status(400).json({ message: "Already disliked" });
+    }
+
+    video.dislikes.push(userId);
+    video.likes = video.likes.filter(
+      (id) => id.toString() !== userId.toString()
+    );
+
     await video.save();
 
     res.json(video);
