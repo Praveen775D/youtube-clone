@@ -1,3 +1,4 @@
+// server/routes/videoRoutes.js
 import express from "express";
 import {
   getVideos,
