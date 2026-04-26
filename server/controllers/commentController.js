@@ -1,7 +1,8 @@
+// server/controllers/commentController.js
 import Comment from "../models/Comment.js";
 
 
-// ✅ ADD COMMENT
+//  ADD COMMENT
 export const addComment = async (req, res) => {
   try {
     const { text, videoId } = req.body;
@@ -25,7 +26,7 @@ export const addComment = async (req, res) => {
 };
 
 
-// ✅ GET COMMENTS BY VIDEO
+//  GET COMMENTS BY VIDEO
 export const getCommentsByVideo = async (req, res) => {
   try {
     const comments = await Comment.find({ video: req.params.videoId })
@@ -39,7 +40,7 @@ export const getCommentsByVideo = async (req, res) => {
 };
 
 
-// ✅ UPDATE COMMENT
+//  UPDATE COMMENT
 export const updateComment = async (req, res) => {
   try {
     const comment = await Comment.findById(req.params.id);
@@ -63,7 +64,7 @@ export const updateComment = async (req, res) => {
 };
 
 
-// ✅ DELETE COMMENT
+//  DELETE COMMENT
 export const deleteComment = async (req, res) => {
   try {
     const comment = await Comment.findById(req.params.id);

@@ -1,8 +1,9 @@
+// server/controllers/channelController.js
 import Channel from "../models/Channel.js";
 import Video from "../models/Video.js";
 
 
-// ✅ CREATE CHANNEL
+//  CREATE CHANNEL
 export const createChannel = async (req, res) => {
   try {
     const { channelName, description } = req.body;
@@ -24,7 +25,7 @@ export const createChannel = async (req, res) => {
 };
 
 
-// ✅ GET CHANNEL DETAILS
+//  GET CHANNEL DETAILS
 export const getChannel = async (req, res) => {
   try {
     const channel = await Channel.findById(req.params.id)
@@ -42,7 +43,7 @@ export const getChannel = async (req, res) => {
 };
 
 
-// ✅ ADD VIDEO TO CHANNEL
+//  ADD VIDEO TO CHANNEL
 export const addVideoToChannel = async (req, res) => {
   try {
     const { videoId } = req.body;
@@ -67,7 +68,7 @@ export const addVideoToChannel = async (req, res) => {
 };
 
 
-// ✅ DELETE VIDEO FROM CHANNEL
+//  DELETE VIDEO FROM CHANNEL
 export const removeVideoFromChannel = async (req, res) => {
   try {
     const { videoId } = req.body;

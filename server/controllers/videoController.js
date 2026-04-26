@@ -1,3 +1,4 @@
+// server/controllers/videoController.js
 import Video from "../models/Video.js";
 
 
