@@ -3,7 +3,7 @@
 import Video from "../models/Video.js";
 import Channel from "../models/Channel.js";
 
-/* ================= GET VIDEOS ================= */
+/*   GET VIDEOS   */
 export const getVideos = async (req, res) => {
   try {
     const { search = "", category = "All", page = 1, limit = 12 } = req.query;
@@ -31,7 +31,7 @@ export const getVideos = async (req, res) => {
   }
 };
 
-/* ================= GET VIDEO ================= */
+/*   GET VIDEO   */
 export const getVideoById = async (req, res) => {
   try {
     const video = await Video.findById(req.params.id).populate(
@@ -50,7 +50,7 @@ export const getVideoById = async (req, res) => {
   }
 };
 
-/* ================= UPLOAD VIDEO ================= */
+/*   UPLOAD VIDEO   */
 export const uploadVideo = async (req, res) => {
   try {
     const { title, description, category, videoUrl } = req.body;
@@ -122,7 +122,7 @@ export const uploadVideo = async (req, res) => {
   }
 };
 
-/* ================= UPDATE VIDEO ================= */
+/*   UPDATE VIDEO   */
 export const updateVideo = async (req, res) => {
   try {
     const video = await Video.findById(req.params.id);
@@ -147,7 +147,7 @@ export const updateVideo = async (req, res) => {
   }
 };
 
-/* ================= DELETE VIDEO ================= */
+/*   DELETE VIDEO   */
 export const deleteVideo = async (req, res) => {
   try {
     const video = await Video.findById(req.params.id);
@@ -172,7 +172,7 @@ export const deleteVideo = async (req, res) => {
   }
 };
 
-/* ================= 👍 LIKE VIDEO ================= */
+/*   👍 LIKE VIDEO   */
 export const likeVideo = async (req, res) => {
   try {
     const video = await Video.findById(req.params.id);
@@ -206,7 +206,7 @@ export const likeVideo = async (req, res) => {
   }
 };
 
-/* ================= 👎 DISLIKE VIDEO ================= */
+/*   👎 DISLIKE VIDEO   */
 export const dislikeVideo = async (req, res) => {
   try {
     const video = await Video.findById(req.params.id);
