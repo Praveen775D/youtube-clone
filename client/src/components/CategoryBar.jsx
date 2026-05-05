@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-/* 🔥 FULL CATEGORY LIST */
+/*  FULL CATEGORY LIST */
 const categories = [
   "All","Music","Remixes",
   "Trending", "Cricket", "New to you", 
