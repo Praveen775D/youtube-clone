@@ -1,3 +1,4 @@
+// client/src/utils/media.js
 export const getMediaUrl = (url) => {
   if (!url) return "/default-thumbnail.png";
   if (url.startsWith("http")) return url;
