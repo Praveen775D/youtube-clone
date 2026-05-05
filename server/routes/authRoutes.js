@@ -9,6 +9,7 @@ import {
   logoutUser,
 } from "../controllers/authController.js";
 
+// AUTH ROUTES
 const router = express.Router();
 
 router.post("/register", registerUser);
