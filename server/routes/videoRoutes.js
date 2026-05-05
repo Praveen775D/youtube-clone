@@ -1,5 +1,4 @@
 // server/routes/videoRoutes.js
-
 import express from "express";
 import {
   getVideos,
@@ -8,7 +7,7 @@ import {
   updateVideo,
   deleteVideo,
   likeVideo,
-  dislikeVideo
+  dislikeVideo 
 } from "../controllers/videoController.js";
 
 import protect from "../middleware/authMiddleware.js";
@@ -20,8 +19,8 @@ const router = express.Router();
 router.get("/", getVideos);
 router.get("/:id", getVideoById);
 
-/* LIKE / DISLIKE */
-router.put("/:id/like", protect, likeVideo);
+/* LIKE  and DISLIKE */
+router.put("/:id/like", protect, likeVideo); // PUT because we are updating the video document by adding/removing userId from likes array
 router.put("/:id/dislike", protect, dislikeVideo);
 
 /* UPLOAD */
