@@ -25,20 +25,20 @@ const userSchema = new mongoose.Schema(
       default: "https://i.pravatar.cc/150",
     },
 
-    /* 🔥 IMPORTANT: LINK USER → CHANNEL */
+    /*  IMPORTANT: LINK USER → CHANNEL */
     channelId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Channel",
       default: null,
     },
 
-    /* 🔥 SUBSCRIBERS (FOR FUTURE USE) */
+    /*  SUBSCRIBERS (FOR FUTURE USE) */
     subscribers: {
       type: Number,
       default: 0,
     },
 
-    /* 🔥 SUBSCRIPTIONS */
+    /*  SUBSCRIPTIONS */
     subscribedChannels: [
       {
         type: mongoose.Schema.Types.ObjectId,
