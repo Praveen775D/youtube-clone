@@ -4,7 +4,7 @@ import { useState } from "react";
 import API from "../api/axios";
 import { useNavigate } from "react-router-dom";
 
-/* 🔥 FULL CATEGORY LIST */
+/*  FULL CATEGORY LIST */
 const categories = [
   "All",
   "Trending", "Recently uploaded", "New to you", "Watched",
@@ -42,7 +42,7 @@ export default function UploadVideo() {
 
   const [loading, setLoading] = useState(false);
 
-  /* ================= SUBMIT ================= */
+  /*   SUBMIT   */
   const handleUpload = async () => {
     try {
       if (!form.title) return alert("Title required");
@@ -76,7 +76,7 @@ export default function UploadVideo() {
 
       const res = await API.post("/videos/upload", data);
 
-      alert("🚀 Uploaded!");
+      alert(" Uploaded!");
       navigate(`/video/${res.data.video._id}`);
     } catch (err) {
       console.error(err);
@@ -115,7 +115,7 @@ export default function UploadVideo() {
 
         <div className="grid md:grid-cols-2 gap-6">
 
-          {/* ================= LEFT ================= */}
+          {/*   LEFT   */}
           <div className="space-y-6">
 
             {/* FILE MODE */}
@@ -213,7 +213,7 @@ export default function UploadVideo() {
             )}
           </div>
 
-          {/* ================= RIGHT ================= */}
+          {/*   RIGHT   */}
           <div className="space-y-4">
 
             <input
@@ -234,7 +234,7 @@ export default function UploadVideo() {
               className="w-full p-3 bg-[#121212] border border-[#333] rounded"
             />
 
-            {/* 🔥 CATEGORY DROPDOWN */}
+            {/*  CATEGORY DROPDOWN */}
             <select
               value={form.category}
               onChange={(e) =>
