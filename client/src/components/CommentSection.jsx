@@ -1,3 +1,6 @@
+// This component handles the comment section of the video page, allowing users to view, add, edit, delete, like, and dislike comments.
+
+// client/src/components/CommentSection.jsx
 import { useEffect, useState } from "react";
 import API from "../api/axios";
 import {
@@ -16,11 +19,11 @@ export default function CommentSection({ videoId }) {
   const [editId, setEditId] = useState(null);
   const [editText, setEditText] = useState("");
 
-  /* ================= USER ID FIX ================= */
+  /*   USER ID FIX   */
   const currentUserId =
     user?._id || user?.id || user?.user?._id;
 
-  /* ================= FETCH ================= */
+  /*   FETCH   */
   const fetchComments = async () => {
     const res = await API.get(`/comments/${videoId}`);
     setComments(res.data);
@@ -30,7 +33,7 @@ export default function CommentSection({ videoId }) {
     fetchComments();
   }, [videoId]);
 
-  /* ================= ADD ================= */
+  /*   ADD   */
   const addComment = async () => {
     if (!text.trim()) return;
 
@@ -43,13 +46,13 @@ export default function CommentSection({ videoId }) {
     setText("");
   };
 
-  /* ================= DELETE ================= */
+  /*   DELETE   */
   const deleteComment = async (id) => {
     await API.delete(`/comments/${id}`);
     setComments((prev) => prev.filter((c) => c._id !== id));
   };
 
-  /* ================= EDIT ================= */
+  /*   EDIT   */
   const saveEdit = async () => {
     const res = await API.put(`/comments/${editId}`, {
       text: editText,
@@ -63,7 +66,7 @@ export default function CommentSection({ videoId }) {
     setEditText("");
   };
 
-  /* ================= LIKE ================= */
+  /*   LIKE   */
   const likeComment = async (id) => {
     const res = await API.put(`/comments/like/${id}`);
 
@@ -72,7 +75,7 @@ export default function CommentSection({ videoId }) {
     );
   };
 
-  /* ================= DISLIKE ================= */
+  /*   DISLIKE   */
   const dislikeComment = async (id) => {
     const res = await API.put(`/comments/dislike/${id}`);
 
