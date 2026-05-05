@@ -1,9 +1,10 @@
 // server/middleware/uploadMiddleware.js
+
 import multer from "multer";
 import path from "path";
 import fs from "fs";
 
-/* 🔥 Ensure directory exists */
+/*  Ensure directory exists */
 const ensureDir = (dir) => {
   if (!dir) return;
   if (!fs.existsSync(dir)) {
@@ -11,7 +12,7 @@ const ensureDir = (dir) => {
   }
 };
 
-/* 🔥 Storage config */
+/*  Storage config */
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     let folder = "uploads";
