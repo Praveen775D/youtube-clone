@@ -4,7 +4,7 @@ import Channel from "../models/Channel.js";
 import User from "../models/User.js";
 import Video from "../models/Video.js";
 
-/* ================= HELPERS ================= */
+/*   HELPERS   */
 
 const DEFAULT_AVATAR =
   "https://cdn-icons-png.flaticon.com/512/149/149071.png";
@@ -14,7 +14,7 @@ const DEFAULT_BANNER =
 
 const send = (res, status, data) => res.status(status).json(data);
 
-/* 🔥 BUILD FULL URL (FIXED) */
+/*  BUILD FULL URL (FIXED) */
 const buildUrl = (req, filePath) => {
   if (!filePath) return "";
   if (filePath.startsWith("http")) return filePath;
@@ -22,7 +22,7 @@ const buildUrl = (req, filePath) => {
   return `${req.protocol}://${req.get("host")}${filePath}`;
 };
 
-/* ================= CREATE CHANNEL ================= */
+/*   CREATE CHANNEL   */
 
 export const createChannel = async (req, res) => {
   try {
@@ -35,7 +35,7 @@ export const createChannel = async (req, res) => {
       return send(res, 400, { message: "Channel name required" });
     }
 
-    // 🔥 Only one channel per user
+    //  Only one channel per user
     const exists = await Channel.findOne({ owner: userId });
     if (exists) {
       return send(res, 400, {
@@ -58,8 +58,8 @@ export const createChannel = async (req, res) => {
     const channel = await Channel.create({
       channelName: channelName.trim(),
       description: description || "",
-      channelAvatar: buildUrl(req, avatarPath),   // ✅ FIXED
-      channelBanner: buildUrl(req, bannerPath),   // ✅ FIXED
+      channelAvatar: buildUrl(req, avatarPath),
+      channelBanner: buildUrl(req, bannerPath), 
       owner: userId,
       subscribers: 0,
     });
@@ -75,7 +75,7 @@ export const createChannel = async (req, res) => {
   }
 };
 
-/* ================= GET SINGLE CHANNEL ================= */
+/*   GET SINGLE CHANNEL   */
 
 export const getChannel = async (req, res) => {
   try {
@@ -89,7 +89,6 @@ export const getChannel = async (req, res) => {
       return send(res, 404, { message: "Channel not found" });
     }
 
-    // ✅ FIXED
     channel.channelAvatar = buildUrl(req, channel.channelAvatar);
     channel.channelBanner = buildUrl(req, channel.channelBanner);
 
@@ -97,7 +96,7 @@ export const getChannel = async (req, res) => {
 
     channel.videos = videos.map((v) => ({
       ...v,
-      thumbnailUrl: buildUrl(req, v.thumbnailUrl), // ✅ FIXED
+      thumbnailUrl: buildUrl(req, v.thumbnailUrl), 
     }));
 
     send(res, 200, { success: true, channel });
@@ -107,7 +106,7 @@ export const getChannel = async (req, res) => {
   }
 };
 
-/* ================= GET MY CHANNEL ================= */
+/*   GET MY CHANNEL   */
 
 export const getMyChannel = async (req, res) => {
   try {
@@ -119,7 +118,6 @@ export const getMyChannel = async (req, res) => {
       return send(res, 404, { message: "No channel found" });
     }
 
-    // ✅ FIXED
     channel.channelAvatar = buildUrl(req, channel.channelAvatar);
     channel.channelBanner = buildUrl(req, channel.channelBanner);
 
@@ -127,7 +125,7 @@ export const getMyChannel = async (req, res) => {
 
     channel.videos = videos.map((v) => ({
       ...v,
-      thumbnailUrl: buildUrl(req, v.thumbnailUrl), // ✅ FIXED
+      thumbnailUrl: buildUrl(req, v.thumbnailUrl),
     }));
 
     send(res, 200, { success: true, channel });
@@ -137,7 +135,7 @@ export const getMyChannel = async (req, res) => {
   }
 };
 
-/* ================= UPDATE CHANNEL ================= */
+/*   UPDATE CHANNEL   */
 
 export const updateChannel = async (req, res) => {
   try {
@@ -187,7 +185,7 @@ export const updateChannel = async (req, res) => {
   }
 };
 
-/* ================= GET ALL CHANNELS ================= */
+/*   GET ALL CHANNELS   */
 
 export const getAllChannels = async (req, res) => {
   try {
@@ -209,7 +207,7 @@ export const getAllChannels = async (req, res) => {
   }
 };
 
-/* ================= SUBSCRIBE ================= */
+/*   SUBSCRIBE   */
 
 export const toggleSubscribe = async (req, res) => {
   try {
@@ -247,7 +245,7 @@ export const toggleSubscribe = async (req, res) => {
   }
 };
 
-/* ================= DELETE CHANNEL ================= */
+/*   DELETE CHANNEL   */
 
 export const deleteChannel = async (req, res) => {
   try {
@@ -279,7 +277,7 @@ export const deleteChannel = async (req, res) => {
   }
 };
 
-/* ================= STUDIO DATA ================= */
+/*   STUDIO DATA   */
 
 export const getStudioData = async (req, res) => {
   try {
