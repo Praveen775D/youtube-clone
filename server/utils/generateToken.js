@@ -1,6 +1,8 @@
 // server/utils/generateToken.js
 
-import jwt from "jsonwebtoken"; // ✅ ADD THIS LINE
+import jwt from "jsonwebtoken"; // TOKEN GENERATION
+
+// ACCESS TOKEN WITH SHORT EXPIRY
 
 export const generateAccessToken = (userId) => {
   return jwt.sign(
@@ -9,6 +11,8 @@ export const generateAccessToken = (userId) => {
     { expiresIn: "15m" }
   );
 };
+
+// REFRESH TOKEN WITH LONGER EXPIRY
 
 export const generateRefreshToken = (userId) => {
   return jwt.sign(
