@@ -1,3 +1,4 @@
+// server/routes/commentRoutes.js
 import express from "express";
 import {
   addComment,
