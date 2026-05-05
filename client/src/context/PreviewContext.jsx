@@ -1,3 +1,6 @@
+// Context for managing video preview state in the React client application
+// client/src/context/PreviewContext.jsx
+
 import { createContext, useContext, useRef } from "react";
 
 const PreviewContext = createContext();
