@@ -1,15 +1,13 @@
-// src/api/axios.js
-
 import axios from "axios";
 
-/*   BASE INSTANCE   */
+/* BASE INSTANCE */
 
 const API = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: import.meta.env.VITE_API_URL + "/api",
   withCredentials: true,
 });
 
-/*   TOKEN HELPERS   */
+/* TOKEN HELPERS */
 
 const getToken = () => localStorage.getItem("accessToken");
 
@@ -25,22 +23,18 @@ const clearAuth = () => {
   window.location.href = "/login";
 };
 
-/*   REQUEST INTERCEPTOR   */
+/* REQUEST INTERCEPTOR */
 
 API.interceptors.request.use(
   (config) => {
     const token = getToken();
-
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-
+    if (token) config.headers.Authorization = `Bearer ${token}`;
     return config;
   },
   (error) => Promise.reject(error)
 );
 
-/*   REFRESH CONTROL   */
+/* REFRESH CONTROL */
 
 let isRefreshing = false;
 let subscribers = [];
@@ -52,32 +46,23 @@ const notifySubscribers = (token) => {
   subscribers = [];
 };
 
-/*   RESPONSE INTERCEPTOR   */
+/* RESPONSE INTERCEPTOR */
 
 API.interceptors.response.use(
   (res) => res,
-
   async (error) => {
     const originalRequest = error.config;
 
-    if (!error.response) {
-      return Promise.reject(error);
-    }
+    if (!error.response) return Promise.reject(error);
 
-    /*  ONLY handle 401 */
-    if (error.response.status !== 401) {
-      return Promise.reject(error);
-    }
+    if (error.response.status !== 401) return Promise.reject(error);
 
-    /* prevent infinite loop */
     if (originalRequest._retry) {
       clearAuth();
       return Promise.reject(error);
     }
 
     originalRequest._retry = true;
-
-    /*   IF ALREADY REFRESHING   */
 
     if (isRefreshing) {
       return new Promise((resolve) => {
@@ -94,16 +79,14 @@ API.interceptors.response.use(
       console.log("🔄 Refreshing token...");
 
       const { data } = await axios.post(
-        "http://localhost:5000/api/auth/refresh",
+        `${import.meta.env.VITE_API_URL}/api/auth/refresh`,
         {},
         { withCredentials: true }
       );
 
       const newToken = data.accessToken;
 
-      if (!newToken) {
-        throw new Error("No token received");
-      }
+      if (!newToken) throw new Error("No token received");
 
       setToken(newToken);
 
@@ -113,7 +96,7 @@ API.interceptors.response.use(
 
       return API(originalRequest);
     } catch (err) {
-      console.error(" Refresh failed:", err);
+      console.error("Refresh failed:", err);
       clearAuth();
       return Promise.reject(err);
     } finally {
