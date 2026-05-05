@@ -1,3 +1,5 @@
+// client/src/pages/Register.jsx
+
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import API from "../api/axios";
@@ -28,7 +30,7 @@ export default function Register() {
     }
   };
 
-  // ✅ FIXED GOOGLE REGISTER
+  //  FIXED GOOGLE REGISTER
   const handleGoogle = async (res) => {
     try {
       const { data } = await API.post("/auth/google", {
