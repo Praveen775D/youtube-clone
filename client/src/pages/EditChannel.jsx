@@ -1,3 +1,6 @@
+// This page is for editing an existing channel. It fetches the current channel data, allows the user to change the name, description, avatar, and banner, and then saves the changes via an API call.
+
+// client/src/pages/EditChannel.jsx
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import API from "../api/axios";
@@ -18,7 +21,7 @@ export default function EditChannel() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  /* ================= FETCH ================= */
+  /*   FETCH   */
   useEffect(() => {
     const fetchChannel = async () => {
       try {
@@ -42,7 +45,7 @@ export default function EditChannel() {
     fetchChannel();
   }, [id]);
 
-  /* ================= FILE HANDLER ================= */
+  /*   FILE HANDLER   */
   const handleFile = (file, type) => {
     if (!file) return;
 
@@ -57,7 +60,7 @@ export default function EditChannel() {
     }
   };
 
-  /* ================= SAVE ================= */
+  /*   SAVE   */
   const handleSave = async () => {
     try {
       const form = new FormData();
@@ -70,15 +73,15 @@ export default function EditChannel() {
 
       await API.put(`/channels/${id}`, form);
 
-      alert("Updated successfully ✅");
+      alert("Updated successfully ");
       navigate(`/channel/${id}`);
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Update failed ❌");
+      alert(err.response?.data?.message || "Update failed ");
     }
   };
 
-  /* ================= UI ================= */
+  /*   UI   */
 
   if (loading) return <p className="text-white p-6">Loading...</p>;
 
