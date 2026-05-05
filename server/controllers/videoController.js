@@ -172,7 +172,7 @@ export const deleteVideo = async (req, res) => {
   }
 };
 
-/*   👍 LIKE VIDEO   */
+/*    LIKE VIDEO   */
 export const likeVideo = async (req, res) => {
   try {
     const video = await Video.findById(req.params.id);
@@ -206,7 +206,7 @@ export const likeVideo = async (req, res) => {
   }
 };
 
-/*   👎 DISLIKE VIDEO   */
+/*    DISLIKE VIDEO   */
 export const dislikeVideo = async (req, res) => {
   try {
     const video = await Video.findById(req.params.id);
