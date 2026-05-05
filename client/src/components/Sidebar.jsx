@@ -24,7 +24,7 @@ export default function Sidebar({ isOpen, isWatchPage, setSidebarOpen }) {
 
   return (
     <>
-      {/* 🔥 BACKDROP (ONLY WATCH PAGE) */}
+      {/*  BACKDROP (ONLY WATCH PAGE) */}
       {isWatchPage && isOpen && (
         <div
           onClick={() => setSidebarOpen(false)}
@@ -32,7 +32,7 @@ export default function Sidebar({ isOpen, isWatchPage, setSidebarOpen }) {
         />
       )}
 
-      {/* 🔥 SIDEBAR */}
+      {/*  SIDEBAR */}
       <aside
         className={`
           fixed top-14 left-0 h-[calc(100vh-56px)]
@@ -52,7 +52,7 @@ export default function Sidebar({ isOpen, isWatchPage, setSidebarOpen }) {
       >
         <div className="flex flex-col gap-2 px-2 py-3 text-white overflow-y-auto scrollbar-hide h-full pb-10">
 
-          {/* 🔹 MAIN */}
+          {/* MAIN */}
           <Section>
             <SidebarItem
               to="/"
@@ -79,7 +79,7 @@ export default function Sidebar({ isOpen, isWatchPage, setSidebarOpen }) {
 
           <Divider />
 
-          {/* 🔥 USER SECTION */}
+          {/*  USER SECTION */}
           {!user ? (
             <>
               <Section title={isOpen ? "You" : ""}>
@@ -115,7 +115,7 @@ export default function Sidebar({ isOpen, isWatchPage, setSidebarOpen }) {
 
           <Divider />
 
-          {/* 🔥 EXPLORE */}
+          {/*  EXPLORE */}
           <Section title={isOpen ? "Explore" : ""}>
             <SidebarItem icon={<ShoppingBag size={22} />} label="Shopping" isOpen={isOpen} />
             <SidebarItem icon={<Music size={22} />} label="Music" isOpen={isOpen} />
@@ -124,7 +124,7 @@ export default function Sidebar({ isOpen, isWatchPage, setSidebarOpen }) {
 
           <Divider />
 
-          {/* 🔧 SETTINGS */}
+          {/*  SETTINGS */}
           <Section>
             <SidebarItem icon={<Settings size={22} />} label="Settings" isOpen={isOpen} />
             <SidebarItem icon={<Flag size={22} />} label="Report history" isOpen={isOpen} />
@@ -146,7 +146,7 @@ export default function Sidebar({ isOpen, isWatchPage, setSidebarOpen }) {
   );
 }
 
-/* ================= UI ================= */
+/*   UI   */
 
 function Section({ title, children }) {
   return (
