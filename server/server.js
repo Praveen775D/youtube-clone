@@ -14,13 +14,13 @@ import videoRoutes from "./routes/videoRoutes.js";
 import commentRoutes from "./routes/commentRoutes.js";
 import channelRoutes from "./routes/channelRoutes.js";
 
-/* ================= CONFIG ================= */
+/*  CONFIG   */
 dotenv.config();
 connectDB();
 
 const app = express();
 
-/* ================= CREATE FOLDERS ================= */
+/*   CREATE FOLDERS   */
 const createFolders = () => {
   const dirs = [
     "uploads",
@@ -39,7 +39,7 @@ const createFolders = () => {
 
 createFolders();
 
-/* ================= MIDDLEWARE ================= */
+/*   MIDDLEWARE   */
 app.use(morgan("dev"));
 
 app.use(
@@ -59,18 +59,18 @@ app.use(cookieParser());
 /*  THIS IS REQUIRED */
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
-/* ================= ROUTES ================= */
+/*   ROUTES   */
 app.use("/api/auth", authRoutes);
 app.use("/api/videos", videoRoutes);
 app.use("/api/comments", commentRoutes);
 app.use("/api/channels", channelRoutes);
 
-/* ================= HEALTH ================= */
+/*   HEALTH   */
 app.get("/", (req, res) => {
-  res.send("🚀 API running...");
+  res.send(" API running...");
 });
 
-/* ================= ERROR ================= */
+/*   ERROR   */
 app.use((req, res) => {
   res.status(404).json({ message: "Route not found" });
 });
@@ -82,7 +82,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-/* ================= START ================= */
+/*   START   */
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
