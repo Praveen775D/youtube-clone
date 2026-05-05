@@ -1,4 +1,5 @@
 // server/server.js
+
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -6,9 +7,7 @@ import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import path from "path";
 import fs from "fs";
-
 import connectDB from "./config/db.js";
-
 import authRoutes from "./routes/authRoutes.js";
 import videoRoutes from "./routes/videoRoutes.js";
 import commentRoutes from "./routes/commentRoutes.js";
@@ -51,12 +50,9 @@ app.use(
 
 app.use(express.json({ limit: "100mb" }));
 app.use(express.urlencoded({ extended: true }));
-
 app.use(cookieParser());
 
-
-
-/*  THIS IS REQUIRED */
+/*  This is required for serving static files */
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
 /*   ROUTES   */
