@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* ================= YOUTUBE THEME ================= */
+/*   YOUTUBE THEME   */
 :root {
   --yt-bg: #0f0f0f;
   --yt-card: #181818;
@@ -12,7 +12,7 @@
   --yt-red: #ff0000;
 }
 
-/* ================= GLOBAL ================= */
+/*   GLOBAL   */
 body {
   background: var(--yt-bg);
   color: var(--yt-text);
@@ -24,7 +24,7 @@ body {
   transition: all 0.15s ease-in-out;
 }
 
-/* ================= SCROLLBAR ================= */
+/*   SCROLLBAR   */
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -48,7 +48,7 @@ body {
   background: #666;
 }
 
-/* ================= TEXT ================= */
+/*   TEXT   */
 .text-sub {
   color: var(--yt-subtext);
 }
@@ -57,7 +57,7 @@ body {
   color: var(--yt-blue);
 }
 
-/* ================= CARDS ================= */
+/*   CARDS   */
 .yt-card {
   background: var(--yt-card);
   border-radius: 12px;
@@ -67,7 +67,7 @@ body {
   background: var(--yt-hover);
 }
 
-/* ================= BUTTONS ================= */
+/*   BUTTONS   */
 .yt-btn {
   background: var(--yt-hover);
   padding: 6px 14px;
@@ -88,7 +88,7 @@ body {
   background: #cc0000;
 }
 
-/* ================= INPUT ================= */
+/*   INPUT   */
 .yt-input {
   background: #121212;
   border: 1px solid var(--yt-border);
@@ -101,7 +101,7 @@ body {
   border-color: var(--yt-blue);
 }
 
-/* ================= AVATAR ================= */
+/*   AVATAR   */
 .yt-avatar {
   border-radius: 999px;
   overflow: hidden;
@@ -110,14 +110,14 @@ body {
   justify-content: center;
 }
 
-/* ================= VIDEO GRID ================= */
+/*   VIDEO GRID   */
 .yt-grid {
   display: grid;
   gap: 16px;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 }
 
-/* ================= LINE CLAMP ================= */
+/*   LINE CLAMP   */
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -125,19 +125,19 @@ body {
   overflow: hidden;
 }
 
-/* ================= HOVER EFFECT ================= */
+/*   HOVER EFFECT   */
 .yt-hover:hover {
   background: var(--yt-hover);
 }
 
-/* ================= DROPDOWN ================= */
+/*   DROPDOWN   */
 .yt-dropdown {
   background: var(--yt-card);
   border: 1px solid var(--yt-border);
   border-radius: 12px;
 }
 
-/* ================= SHADOW ================= */
+/*   SHADOW   */
 .yt-shadow {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
 }

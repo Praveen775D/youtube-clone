@@ -1,10 +1,10 @@
 // client/src/App.jsx
+
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useState } from "react";
 
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
-
 import Home from "./pages/Home";
 import VideoPage from "./pages/VideoPage";
 import ChannelPage from "./pages/ChannelPage";
@@ -12,14 +12,13 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import CreateChannel from "./pages/CreateChannel";
 import UploadVideo from "./pages/UploadVideo";
-
 import EditChannel from "./pages/EditChannel";
 import Studio from "./pages/Studio";
 // (if you have edit video page)
 import EditVideo from "./pages/EditVideo";
 
 
-/* 🔥 LAYOUT WRAPPER */
+/*  LAYOUT WRAPPER */
 function Layout() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const location = useLocation();
@@ -61,8 +60,6 @@ function Layout() {
             <Route path="/studio" element={<Studio />} />
             <Route path="/edit-channel/:id" element={<EditChannel />} />
             <Route path="/edit-video/:id" element={<EditVideo />} />
-
-            {/* ✅ FIXED */}
             <Route path="/upload" element={<UploadVideo />} />
           </Routes>
         </main>
