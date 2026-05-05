@@ -263,6 +263,10 @@ Users can:
 
 ##  10. Installation & Setup
 
+## Clone Repository
+
+- git clone https://github.com/Praveen775D/youtube-clone
+- cd youtube-clone
 
 ### Server (Backend)
 cd server
@@ -274,3 +278,30 @@ cd client
 npm install
 npm run dev
 
+## Create .env:
+
+- PORT=5000
+- MONGO_URI=your_mongodb_url
+- JWT_SECRET=your_secret
+
+---
+
+## 11. API Overview
+
+- Auth
+- POST /api/auth/register
+- POST /api/auth/login
+
+## Videos
+- GET /api/videos
+- POST /api/videos/upload
+- PUT /api/videos//like
+## Channels
+- POST /api/channels
+- GET /api/channels/
+
+## Author
+- Name : praveen
+- GitHub: https://github.com/Praveen775D
+- Project: YouTube Clone (MERN Stack)
+---
