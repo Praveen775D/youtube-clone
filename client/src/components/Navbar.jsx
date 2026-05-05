@@ -1,4 +1,5 @@
 // client/src/components/Navbar.jsx
+
 import { Menu, Search, Mic, Bell, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
@@ -17,7 +18,7 @@ export default function Navbar({ toggleSidebar }) {
   const profileRef = useRef();
   const createRef = useRef();
 
-  /* 🔥 FETCH CHANNEL */
+  /*  FETCH CHANNEL */
   useEffect(() => {
     const fetchChannel = async () => {
       try {
