@@ -1,6 +1,6 @@
 import Comment from "../models/Comment.js";
 
-/* ================= ADD ================= */
+/*   ADD   */
 export const addComment = async (req, res) => {
   const { text, videoId } = req.body;
 
@@ -15,7 +15,7 @@ export const addComment = async (req, res) => {
   res.status(201).json(populated);
 };
 
-/* ================= GET ================= */
+/*   GET   */
 export const getCommentsByVideo = async (req, res) => {
   const comments = await Comment.find({
     video: req.params.videoId,
@@ -26,7 +26,7 @@ export const getCommentsByVideo = async (req, res) => {
   res.json(comments);
 };
 
-/* ================= UPDATE ================= */
+/*   UPDATE   */
 export const updateComment = async (req, res) => {
   const comment = await Comment.findById(req.params.id);
 
@@ -42,7 +42,7 @@ export const updateComment = async (req, res) => {
   res.json(updated);
 };
 
-/* ================= DELETE ================= */
+/*   DELETE   */
 export const deleteComment = async (req, res) => {
   const comment = await Comment.findById(req.params.id);
 
@@ -57,7 +57,7 @@ export const deleteComment = async (req, res) => {
   res.json({ message: "Deleted" });
 };
 
-/* ================= LIKE ================= */
+/*   LIKE   */
 export const likeComment = async (req, res) => {
   const comment = await Comment.findById(req.params.id);
   const userId = req.user._id;
@@ -73,7 +73,7 @@ export const likeComment = async (req, res) => {
   res.json(comment);
 };
 
-/* ================= DISLIKE ================= */
+/*   DISLIKE   */
 export const dislikeComment = async (req, res) => {
   const comment = await Comment.findById(req.params.id);
   const userId = req.user._id;
