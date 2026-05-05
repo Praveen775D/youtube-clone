@@ -1,3 +1,5 @@
+// client/src/pages/Login.jsx
+
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import API from "../api/axios";
@@ -11,14 +13,14 @@ export default function Login() {
     password: "",
   });
 
-  /* ================= LOGIN ================= */
+  /*   LOGIN   */
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
       const { data } = await API.post("/auth/login", form);
 
-      // ✅ FIXED KEY
+      //  FIXED KEY
       localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("user", JSON.stringify(data.user));
 
@@ -30,7 +32,7 @@ export default function Login() {
     }
   };
 
-  /* ================= GOOGLE LOGIN ================= */
+  /*   GOOGLE LOGIN   */
   const handleGoogle = async (res) => {
     try {
       if (!res.credential) {
@@ -41,7 +43,7 @@ export default function Login() {
         token: res.credential,
       });
 
-      // ✅ FIXED KEY
+      //  FIXED KEY
       localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("user", JSON.stringify(data.user));
 
