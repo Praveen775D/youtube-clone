@@ -15,7 +15,7 @@ export default function ChannelPage() {
   const [subscribed, setSubscribed] = useState(false);
   const [menuOpen, setMenuOpen] = useState(null);
 
-  /* ================= SAFE IMAGE HANDLER ================= */
+  /*   SAFE IMAGE HANDLER   */
   const getImage = (url) => {
     if (!url) return "";
     return url.startsWith("http")
@@ -23,7 +23,7 @@ export default function ChannelPage() {
       : `http://localhost:5000${url}`;
   };
 
-  /* ================= FETCH CHANNEL ================= */
+  /*   FETCH CHANNEL   */
   useEffect(() => {
     const fetchChannel = async () => {
       try {
@@ -45,16 +45,16 @@ export default function ChannelPage() {
     };
 
     fetchChannel();
-  }, [id]); // 🔥 FIXED (removed user to stop loop)
+  }, [id]); //  FIXED (removed user to stop loop)
 
-  /* ================= OWNER CHECK ================= */
+  /*   OWNER CHECK   */
   const isOwner =
   user &&
   channel &&
   (String(user._id) === String(channel.owner?._id) ||
     String(user._id) === String(channel.owner));
 
-  /* ================= SUBSCRIBE ================= */
+  /*   SUBSCRIBE   */
   const handleSubscribe = async () => {
     try {
       const res = await API.put(`/channels/${id}/subscribe`);
@@ -84,7 +84,7 @@ export default function ChannelPage() {
     }
   };
 
-  /* ================= DELETE VIDEO ================= */
+  /*   DELETE VIDEO   */
   const handleDeleteVideo = async (videoId) => {
     if (!window.confirm("Delete this video permanently?")) return;
 
@@ -100,7 +100,7 @@ export default function ChannelPage() {
     }
   };
 
-  /* ================= DELETE CHANNEL ================= */
+  /*   DELETE CHANNEL   */
   const handleDeleteChannel = async () => {
     if (!window.confirm("Delete your channel permanently?")) return;
 
@@ -117,7 +117,7 @@ export default function ChannelPage() {
     }
   };
 
-  /* ================= UI ================= */
+  /*   UI   */
   if (loading)
     return <p className="text-white p-5">Loading channel...</p>;
 
@@ -127,7 +127,7 @@ export default function ChannelPage() {
   return (
     <div className="text-white">
 
-      {/* ================= BANNER ================= */}
+      {/*   BANNER   */}
       <div className="h-48 w-full">
         <img
           src={getImage(channel.channelBanner)}
@@ -136,7 +136,7 @@ export default function ChannelPage() {
         />
       </div>
 
-      {/* ================= HEADER ================= */}
+      {/*   HEADER   */}
       <div className="max-w-[1400px] mx-auto px-6 py-5 flex justify-between items-center">
 
         {/* LEFT */}
