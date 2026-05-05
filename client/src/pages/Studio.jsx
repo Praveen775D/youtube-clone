@@ -1,3 +1,5 @@
+// YOUTUBE STUDIO PAGE
+// client/src/pages/Studio.jsx
 import { useEffect, useState } from "react";
 import API from "../api/axios";
 
@@ -8,12 +10,11 @@ export default function Studio() {
   useEffect(() => {
     const fetchStudio = async () => {
       try {
-        const res = await API.get("/channels/studio/me"); // ✅ FIXED
-
+        const res = await API.get("/channels/studio/me"); 
         setData(res.data);
       } catch (err) {
         console.error(err);
-        setError("Failed to load studio ❌");
+        setError("Failed to load studio ");
       }
     };
 
