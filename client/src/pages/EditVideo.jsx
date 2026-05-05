@@ -21,13 +21,13 @@ export default function EditVideo() {
 
   const BASE_URL = "http://localhost:5000";
 
-  /* ================= FETCH VIDEO ================= */
+  /*   FETCH VIDEO   */
   useEffect(() => {
     const fetchVideo = async () => {
       try {
         const res = await API.get(`/videos/${id}`);
 
-        // 🔥 SAFE DATA HANDLING
+        //  SAFE DATA HANDLING
         const v =
           res.data.video ||
           res.data.data ||
@@ -53,7 +53,7 @@ export default function EditVideo() {
 
       } catch (err) {
         console.error(err);
-        setError("Failed to load video ❌");
+        setError("Failed to load video ");
       } finally {
         setLoading(false);
       }
@@ -62,13 +62,13 @@ export default function EditVideo() {
     fetchVideo();
   }, [id]);
 
-  /* ================= THUMBNAIL ================= */
+  /*   THUMBNAIL   */
   const handleThumbnail = (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
     if (!file.type.startsWith("image/")) {
-      return setError("Thumbnail must be an image ❌");
+      return setError("Thumbnail must be an image ");
     }
 
     setThumbnail(file);
@@ -77,7 +77,7 @@ export default function EditVideo() {
     setError("");
   };
 
-  /* ================= UPDATE ================= */
+  /*   UPDATE   */
   const handleUpdate = async () => {
     if (!title.trim()) {
       return setError("Title is required");
@@ -101,34 +101,34 @@ export default function EditVideo() {
         },
       });
 
-      alert("Video updated ✅");
+      alert("Video updated ");
       navigate("/studio");
 
     } catch (err) {
       console.error(err);
       setError(
-        err.response?.data?.message || "Update failed ❌"
+        err.response?.data?.message || "Update failed "
       );
     } finally {
       setSaving(false);
     }
   };
 
-  /* ================= DELETE ================= */
+  /*   DELETE   */
   const handleDelete = async () => {
     if (!window.confirm("Delete this video?")) return;
 
     try {
       await API.delete(`/videos/${id}`);
-      alert("Video deleted ✅");
+      alert("Video deleted ");
       navigate("/studio");
     } catch (err) {
       console.error(err);
-      alert("Delete failed ❌");
+      alert("Delete failed ");
     }
   };
 
-  /* ================= UI ================= */
+  /*  UI  */
 
   if (loading) {
     return <p className="text-white p-6">Loading...</p>;
@@ -148,7 +148,7 @@ export default function EditVideo() {
         </div>
       )}
 
-      {/* ================= THUMBNAIL ================= */}
+      {/*   THUMBNAIL   */}
       <div className="mb-6">
         <label className="block mb-2 text-gray-300">
           Thumbnail
@@ -168,7 +168,7 @@ export default function EditVideo() {
           )}
         </div>
 
-        {/* 🔥 CLEAR BUTTON UI */}
+        {/*  CLEAR BUTTON UI */}
         <input
           type="file"
           accept="image/*"
@@ -191,7 +191,7 @@ export default function EditVideo() {
         )}
       </div>
 
-      {/* ================= TITLE ================= */}
+      {/*   TITLE   */}
       <div className="mb-4">
         <label className="text-sm text-gray-400">
           Title
@@ -204,7 +204,7 @@ export default function EditVideo() {
         />
       </div>
 
-      {/* ================= DESCRIPTION ================= */}
+      {/*   DESCRIPTION   */}
       <div className="mb-6">
         <label className="text-sm text-gray-400">
           Description
@@ -217,7 +217,7 @@ export default function EditVideo() {
         />
       </div>
 
-      {/* ================= ACTIONS ================= */}
+      {/*   ACTIONS   */}
       <div className="flex gap-4">
 
         <button
