@@ -1,3 +1,6 @@
+// Controllers for comment-related operations
+
+// server/controllers/commentController.js
 import Comment from "../models/Comment.js";
 
 /*   ADD   */
