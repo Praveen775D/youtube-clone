@@ -28,10 +28,10 @@ export default function VideoPage() {
 
   const [category, setCategory] = useState("All");
 
-  // 🔥 NEW: control play mode
+  //  NEW: control play mode
   const [playing, setPlaying] = useState(false);
 
-  /* ================= FETCH VIDEO ================= */
+  /*   FETCH VIDEO   */
   useEffect(() => {
     fetchVideo();
   }, [id]);
@@ -46,7 +46,7 @@ export default function VideoPage() {
     }
   };
 
-  /* ================= RECOMMENDED ================= */
+  /*   RECOMMENDED   */
   const fetchRecommended = async (cat) => {
     try {
       const res = await API.get(`/videos?category=${cat}&limit=12`);
@@ -60,7 +60,7 @@ export default function VideoPage() {
     fetchRecommended(category);
   }, [category]);
 
-  /* ================= INIT LIKE STATUS ================= */
+  /*   INIT LIKE STATUS   */
   useEffect(() => {
     if (video && user) {
       setLiked(video.likes?.includes(user._id));
@@ -68,7 +68,7 @@ export default function VideoPage() {
     }
   }, [video, user]);
 
-  /* ================= LIKE ================= */
+  /*   LIKE   */
   const handleLike = async () => {
     try {
       setLiked(!liked);
@@ -81,7 +81,7 @@ export default function VideoPage() {
     }
   };
 
-  /* ================= DISLIKE ================= */
+  /*   DISLIKE   */
   const handleDislike = async () => {
     try {
       setDisliked(!disliked);
@@ -94,13 +94,13 @@ export default function VideoPage() {
     }
   };
 
-  /* ================= SHARE ================= */
+  /*   SHARE   */
   const handleShare = async () => {
     await navigator.clipboard.writeText(window.location.href);
     alert("Link copied!");
   };
 
-  /* ================= DOWNLOAD ================= */
+  /*   DOWNLOAD   */
   const handleDownload = () => {
     const link = document.createElement("a");
     link.href = video.videoUrl;
@@ -108,7 +108,7 @@ export default function VideoPage() {
     link.click();
   };
 
-  /* ================= SUBSCRIBE ================= */
+  /*   SUBSCRIBE   */
   const handleSubscribe = async () => {
     try {
       const res = await API.put(
@@ -127,14 +127,14 @@ export default function VideoPage() {
 
       <div className="flex gap-6 w-full max-w-[1400px]">
 
-        {/* ================= LEFT ================= */}
+        {/*   LEFT   */}
         <div className="flex-1 max-w-[900px]">
 
-          {/* ================= VIDEO (FIXED) ================= */}
+          {/*   VIDEO (FIXED)   */}
           <div className="aspect-video bg-black rounded-xl overflow-hidden relative">
 
             {!playing ? (
-              // ✅ THUMBNAIL VIEW (FIXED)
+              //  THUMBNAIL VIEW (FIXED)
               <img
                 src={
                   video.thumbnailUrl?.startsWith("http")
@@ -146,7 +146,7 @@ export default function VideoPage() {
                 alt="thumbnail"
               />
             ) : (
-              // ✅ VIDEO PLAY
+              //  VIDEO PLAY
               <video
                 src={
                   video.videoUrl?.startsWith("http")
@@ -262,7 +262,7 @@ export default function VideoPage() {
 
         </div>
 
-        {/* ================= RIGHT ================= */}
+        {/*   RIGHT   */}
         <div className="w-[360px] hidden lg:flex flex-col">
 
           <div className="sticky top-16 z-40 bg-[#0f0f0f] pb-2">
