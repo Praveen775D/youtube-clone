@@ -2,14 +2,14 @@
 
 import axios from "axios";
 
-/* ================= BASE INSTANCE ================= */
+/*   BASE INSTANCE   */
 
 const API = axios.create({
   baseURL: "http://localhost:5000/api",
   withCredentials: true,
 });
 
-/* ================= TOKEN HELPERS ================= */
+/*   TOKEN HELPERS   */
 
 const getToken = () => localStorage.getItem("accessToken");
 
@@ -25,7 +25,7 @@ const clearAuth = () => {
   window.location.href = "/login";
 };
 
-/* ================= REQUEST INTERCEPTOR ================= */
+/*   REQUEST INTERCEPTOR   */
 
 API.interceptors.request.use(
   (config) => {
@@ -40,7 +40,7 @@ API.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-/* ================= REFRESH CONTROL ================= */
+/*   REFRESH CONTROL   */
 
 let isRefreshing = false;
 let subscribers = [];
@@ -52,7 +52,7 @@ const notifySubscribers = (token) => {
   subscribers = [];
 };
 
-/* ================= RESPONSE INTERCEPTOR ================= */
+/*   RESPONSE INTERCEPTOR   */
 
 API.interceptors.response.use(
   (res) => res,
@@ -64,7 +64,7 @@ API.interceptors.response.use(
       return Promise.reject(error);
     }
 
-    /* 🔥 ONLY handle 401 */
+    /*  ONLY handle 401 */
     if (error.response.status !== 401) {
       return Promise.reject(error);
     }
@@ -77,7 +77,7 @@ API.interceptors.response.use(
 
     originalRequest._retry = true;
 
-    /* ================= IF ALREADY REFRESHING ================= */
+    /*   IF ALREADY REFRESHING   */
 
     if (isRefreshing) {
       return new Promise((resolve) => {
@@ -113,7 +113,7 @@ API.interceptors.response.use(
 
       return API(originalRequest);
     } catch (err) {
-      console.error("❌ Refresh failed:", err);
+      console.error(" Refresh failed:", err);
       clearAuth();
       return Promise.reject(err);
     } finally {
