@@ -20,13 +20,14 @@ connectDB();
 const app = express();
 
 /*   CREATE FOLDERS   */
+//  Ensure upload directories exist 
 const createFolders = () => {
   const dirs = [
     "uploads",
     "uploads/videos",
     "uploads/thumbnails",
-    "uploads/avatars",   //  REQUIRED
-    "uploads/banners",   //  REQUIRED
+    "uploads/avatars",   
+    "uploads/banners",   
   ];
 
   dirs.forEach((dir) => {
@@ -67,6 +68,7 @@ app.get("/", (req, res) => {
 });
 
 /*   ERROR   */
+// 404 handler
 app.use((req, res) => {
   res.status(404).json({ message: "Route not found" });
 });
@@ -79,6 +81,7 @@ app.use((err, req, res, next) => {
 });
 
 /*   START   */
+// Use environment variable for port or default to 5000
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
