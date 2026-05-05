@@ -1,3 +1,5 @@
+// Seeder script to populate the database with initial video data
+// server/seeder/seedVideos.js
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import fs from "fs";
@@ -22,7 +24,7 @@ const importData = async () => {
     await Video.deleteMany();
     await Video.insertMany(formattedVideos);
 
-    console.log("✅ Videos Seeded Successfully");
+    console.log(" Videos Seeded Successfully");
     process.exit();
   } catch (error) {
     console.error(error);
