@@ -1,4 +1,5 @@
 // client/src/pages/CreateChannel.jsx
+
 import { useState } from "react";
 import API from "../api/axios";
 import { useNavigate } from "react-router-dom";
@@ -33,7 +34,7 @@ export default function CreateChannel() {
         },
       });
 
-      /* 🔥 IMPORTANT FIX (ADD THIS) */
+      /*  IMPORTANT FIX (ADD THIS) */
       const user = JSON.parse(localStorage.getItem("user"));
 
       const updatedUser = {
@@ -43,7 +44,7 @@ export default function CreateChannel() {
 
       localStorage.setItem("user", JSON.stringify(updatedUser));
 
-      /* ✅ REDIRECT TO CHANNEL */
+      /*  REDIRECT TO CHANNEL */
       navigate(`/channel/${res.data.channel._id}`);
 
     } catch (err) {
