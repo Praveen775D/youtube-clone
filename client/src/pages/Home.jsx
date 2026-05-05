@@ -1,3 +1,6 @@
+// This component is the main page of the application, displaying a list of videos based on the selected category. It implements infinite scrolling to load more videos as the user scrolls down.
+
+// client/src/pages/Home.jsx
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import CategoryBar from "../components/CategoryBar";
@@ -79,7 +82,7 @@ export default function Home() {
 
       <CategoryBar onSelect={setCategory} />
 
-      {/* 🔥 YOUTUBE GRID */}
+      {/*  YOUTUBE GRID */}
       <div className="grid gap-5 mt-3
         grid-cols-1
         sm:grid-cols-2
