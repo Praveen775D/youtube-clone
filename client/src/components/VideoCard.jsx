@@ -3,12 +3,10 @@
 import { Link } from "react-router-dom";
 import { useState, useRef } from "react";
 import { getMediaUrl } from "../utils/media";
-
 export default function VideoCard({ video }) {
   const [hover, setHover] = useState(false);
   const videoRef = useRef(null);
   const timerRef = useRef(null);
-
   const enter = () => {
     timerRef.current = setTimeout(() => {
       setHover(true);
