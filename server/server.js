@@ -45,7 +45,7 @@ app.use(morgan("dev"));
 app.use(cors({
   origin: [
     "http://localhost:5173",
-    "https://youtube-clone-mu-bay-69.vercel.app"
+    "https://youtube-clone-eyuj3ufsj-praveens-projects-a615f209.vercel.app"
   ],
   credentials: true
 }));
