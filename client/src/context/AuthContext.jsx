@@ -1,12 +1,11 @@
 // client/src/context/AuthContext.jsx
+
 import { createContext, useState, useEffect, useContext } from "react";
-
 export const AuthContext = createContext();
-
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
 
-  /* ================= LOAD USER ================= */
+  /*   LOAD USER   */
   useEffect(() => {
     const stored = localStorage.getItem("user");
     if (stored) {
@@ -14,16 +13,16 @@ export default function AuthProvider({ children }) {
     }
   }, []);
 
-  /* ================= LOGIN ================= */
+  /*   LOGIN   */
   const login = (data) => {
-    // ✅ backend sends: token + user fields
+    //  backend sends: token + user fields
     localStorage.setItem("token", data.token);
     localStorage.setItem("user", JSON.stringify(data));
 
     setUser(data);
   };
 
-  /* ================= LOGOUT ================= */
+  /*   LOGOUT   */
   const logout = async () => {
     try {
       await fetch("http://localhost:5000/api/auth/logout", {
@@ -47,5 +46,5 @@ export default function AuthProvider({ children }) {
   );
 }
 
-/* ================= CUSTOM HOOK ================= */
+/*   CUSTOM HOOK   */
 export const useAuth = () => useContext(AuthContext);
