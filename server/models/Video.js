@@ -1,5 +1,7 @@
-import mongoose from "mongoose";
+// server/models/Video.js
 
+import mongoose from "mongoose";
+// VIDEO SCHEMA
 const videoSchema = new mongoose.Schema(
   {
     title: {
