@@ -9,9 +9,9 @@ import {
 import { OAuth2Client } from "google-auth-library";
 import jwt from "jsonwebtoken";
 
-const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID); // Google OAuth client
 
-/* ================= REGISTER ================= */
+/*   REGISTER   */
 export const registerUser = async (req, res) => {
   try {
     const { username, email, password } = req.body;
@@ -32,7 +32,7 @@ export const registerUser = async (req, res) => {
       email,
       password: hashed,
     });
-
+    // Generate tokens
     const accessToken = generateAccessToken(user._id);
     const refreshToken = generateRefreshToken(user._id);
 
@@ -60,7 +60,7 @@ export const registerUser = async (req, res) => {
   }
 };
 
-/* ================= LOGIN ================= */
+/*   LOGIN   */
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -75,14 +75,14 @@ export const loginUser = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // 🚨 Google account
+    //  Google account
     if (user.googleId) {
       return res.status(400).json({
         message: "Use Google login for this account",
       });
     }
 
-    // 🚨 CRITICAL FIX (prevents crash)
+    //  CRITICAL FIX (prevents crash)
     if (!user.password) {
       return res.status(400).json({
         message: "Password not set. Use Google login.",
@@ -124,7 +124,7 @@ export const loginUser = async (req, res) => {
   }
 };
 
-/* ================= GOOGLE AUTH ================= */
+/*   GOOGLE AUTH   */
 export const googleAuthUser = async (req, res) => {
   try {
     const { token } = req.body;
@@ -187,7 +187,7 @@ export const googleAuthUser = async (req, res) => {
   }
 };
 
-/* ================= REFRESH ================= */
+/*   REFRESH   */
 export const refreshToken = async (req, res) => {
   try {
     const token = req.cookies.refreshToken;
@@ -213,7 +213,7 @@ export const refreshToken = async (req, res) => {
   }
 };
 
-/* ================= LOGOUT ================= */
+/*   LOGOUT   */
 export const logoutUser = (req, res) => {
   res.clearCookie("refreshToken");
   res.json({ message: "Logged out" });
